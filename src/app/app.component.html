@@ -1,4 +1,4 @@
-<table class="text-center border-2 table-auto w-1/3">
+<!-- <table class="text-center border-2 table-auto w-1/3">
   <tr class="border-2" *ngFor="let heading of headers">
     <th class="border-2">{{ heading.name }}</th>
     <th class="border-2">{{ heading.Class }}</th>
@@ -53,4 +53,85 @@
       </button>
     </td>
   </tr>
-</table>
+</table> -->
+
+<form action="">
+  <table class="text-center border-2 w-1/3">
+    <tr class="border-2" *ngFor="let heading of headers">
+      <th class="border-2">{{ heading.name }}</th>
+      <th class="border-2">{{ heading.Class }}</th>
+      <th class="border-2">{{ heading.Physics }}</th>
+      <th class="border-2">{{ heading.Chemistry }}</th>
+      <th class="border-2">{{ heading.Maths }}</th>
+      <th class="border-2">{{ heading.Action }}</th>
+    </tr>
+    <tbody>
+      <tr
+        *ngFor="let student of students; let i = index"
+        class="border-2"
+        [formGroup]="tableForm"
+      >
+        <td class="border-2">
+          <div *ngIf="!student.isEdit">{{ student.fullName }}</div>
+          <div *ngIf="student.isEdit">
+            <input type="text" formControlName="fullName" />
+          </div>
+        </td>
+        <td class="border-2">
+          <div *ngIf="!student.isEdit">{{ student.class }}</div>
+          <div *ngIf="student.isEdit">
+            <input type="text" formControlName="class" />
+          </div>
+        </td>
+        <td class="border-2">
+          <div *ngIf="!student.isEdit">{{ student.physics }}</div>
+          <div *ngIf="student.isEdit">
+            <input type="text" formControlName="physics" />
+          </div>
+        </td>
+        <td class="border-2">
+          <div *ngIf="!student.isEdit">{{ student.chemistry }}</div>
+          <div *ngIf="student.isEdit">
+            <input type="text" formControlName="chemistry" />
+          </div>
+        </td>
+        <td class="border-2">
+          <div *ngIf="!student.isEdit">{{ student.maths }}</div>
+          <div *ngIf="student.isEdit">
+            <input type="text" formControlName="maths" />
+          </div>
+        </td>
+        <td class="border-2">
+          <button
+            class="blue"
+            *ngIf="!student.isEdit"
+            (click)="onEdit(student)"
+          >
+            Edit
+          </button>
+          <button
+            class="red"
+            *ngIf="!student.isEdit"
+            (click)="onDelete(student)"
+          >
+            Delete
+          </button>
+          <button
+            class="green"
+            *ngIf="student.isEdit"
+            (click)="onSave(student)"
+          >
+            Save
+          </button>
+          <button
+            class="red"
+            *ngIf="student.isEdit"
+            (click)="onCancel(student)"
+          >
+            Cancel
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

@@ -1,18 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  FormsModule,
+  FormControl,
+  FormGroup,
+  FormBuilder,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'figmaui';
+  tableForm!: FormGroup;
+  public student: any;
+  constructor() {}
+  ngOnInit(): void {
+    this.student = {};
+    this.tableForm = new FormGroup({
+      fullName: new FormControl(),
+      class: new FormControl(''),
+      physics: new FormControl(''),
+      chemistry: new FormControl(''),
+      maths: new FormControl(''),
+    });
+  }
+
   // isEdit: boolean = false;
-  fullName!: string;
-  class!: string;
-  physics!: string;
-  chemistry!: string;
-  maths!: string;
+  // fullName!: string;
+  // class!: string;
+  // physics!: string;
+  // chemistry!: string;
+  // maths!: string;
+
+  fullName: any;
+  class: any;
+  physics: any;
+  chemistry: any;
+  maths: any;
 
   headers = [
     {
@@ -76,9 +102,16 @@ export class AppComponent {
   onEdit(student: any) {
     console.log('edit');
     student.isEdit = true;
-
+    this.tableForm = new FormGroup({
+      fullName: new FormControl(student.fullName),
+      class: new FormControl(student.class),
+      physics: new FormControl(student.physics),
+      chemistry: new FormControl(student.chemistry),
+      maths: new FormControl(student.maths),
+    });
     this.students1 = JSON.parse(JSON.stringify(student));
-    console.log(this.students1);
+    // console.log(this.students1);
+    // console.log(this.tableForm);
   }
 
   onDelete(student: any) {
@@ -96,11 +129,28 @@ export class AppComponent {
   onSave(student: any) {
     console.log('saved');
     student.isEdit = false;
-    this.fullName = student.fullName;
-    this.class = student.class;
-    this.physics = student.physics;
-    this.chemistry = student.chemistry;
-    this.maths = student.maths;
+    // this.fullName = student.fullName;
+    // this.class = student.class;
+    // this.physics = student.physics;
+    // this.chemistry = student.chemistry;
+    // this.maths = student.maths;
+    // this.tableForm.value.fullName = student.fullName;
+    // this.tableForm.value.class = student.class;
+    // this.tableForm.value.physics = student.physics;
+    // this.tableForm.value.chemistry = student.chemistry;
+    // this.tableForm.value.maths = student.maths;
+    // console.log(this.tableForm.value);
+    student.fullName = this.tableForm.value.fullName;
+    student.class = this.tableForm.value.class;
+    student.physics = this.tableForm.value.physics;
+    student.chemistry = this.tableForm.value.chemistry;
+    student.maths = this.tableForm.value.maths;
+
+    // this.fullName = this.tableForm.value.fullName;
+    // this.class = this.tableForm.value.class;
+    // this.physics = this.tableForm.value.physics;
+    // this.chemistry = this.tableForm.value.chemistry;
+    // this.maths = this.tableForm.value.maths;
   }
   onCancel(student: any) {
     console.log('cancel');
