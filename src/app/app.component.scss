@@ -8,16 +8,25 @@ tr,th,td{
   padding: 4px;
   margin: 5px;
   color: white;
+  border-radius: 3px;
 }
 .red{
   background-color: rgb(207, 96, 96);
   padding: 4px;
   margin: 5px;
   color: white;
+  border-radius: 3px;
 }
 .green{
   background-color: rgb(96, 207, 96);
   padding: 4px;
   margin: 5px;
   color: white;
+  border-radius: 3px;
+}
+input{
+  padding: 5px;
+  margin: 5px;
+  border: 2px solid gray;
+  border-radius: 3px;
 }

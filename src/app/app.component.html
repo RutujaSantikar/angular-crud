@@ -1,4 +1,4 @@
-<table class="text-center border-2">
+<table class="text-center border-2 table-auto w-1/3">
   <tr class="border-2" *ngFor="let heading of headers">
     <th class="border-2">{{ heading.name }}</th>
     <th class="border-2">{{ heading.Class }}</th>
@@ -11,31 +11,31 @@
     <td class="border-2">
       <div *ngIf="!student.isEdit">{{ student.fullName }}</div>
       <div *ngIf="student.isEdit">
-        <input type="text" [(ngModel)]="student.fullName" />
+        <input type="text" [(ngModel)]="student.fullName" name="fullName" />
       </div>
     </td>
     <td class="border-2">
       <div *ngIf="!student.isEdit">{{ student.class }}</div>
       <div *ngIf="student.isEdit">
-        <input type="text" [(ngModel)]="student.class" />
+        <input type="text" [(ngModel)]="student.class" name="class" />
       </div>
     </td>
     <td class="border-2">
       <div *ngIf="!student.isEdit">{{ student.physics }}</div>
       <div *ngIf="student.isEdit">
-        <input type="text" [(ngModel)]="student.physics" />
+        <input type="text" [(ngModel)]="student.physics" name="physics" />
       </div>
     </td>
     <td class="border-2">
       <div *ngIf="!student.isEdit">{{ student.chemistry }}</div>
       <div *ngIf="student.isEdit">
-        <input type="text" [(ngModel)]="student.chemistry" />
+        <input type="text" [(ngModel)]="student.chemistry" name="chemistry" />
       </div>
     </td>
     <td class="border-2">
       <div *ngIf="!student.isEdit">{{ student.maths }}</div>
       <div *ngIf="student.isEdit">
-        <input type="text" [(ngModel)]="student.maths" />
+        <input type="text" [(ngModel)]="student.maths" name="maths" />
       </div>
     </td>
     <td class="border-2">
