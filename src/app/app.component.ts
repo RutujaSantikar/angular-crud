@@ -1,21 +1,88 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
   FormsModule,
   FormControl,
   FormGroup,
   FormBuilder,
 } from '@angular/forms';
-
+import * as ApexCharts from 'apexcharts';
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexTitleSubtitle,
+} from 'ng-apexcharts';
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  title: ApexTitleSubtitle;
+};
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  @ViewChild('chart') chart!: ChartComponent;
+  public chartOptions: Partial<ChartOptions> | any;
+
+  constructor() {
+    this.chartOptions = {
+      colors: ['#2A93DS', '#37CAEC', '#ADD9D8'],
+      series: [
+        {
+          name: 'Physics',
+          // type: 'column',
+          data: this.students.map((student: any) => student.physics),
+          // data: [80, 85, 70, 79, 89],
+        },
+        // {
+        //   type: 'line',
+        //   data: this.students.map((student: any) => student.physics),
+        //   // data: [80, 85, 70, 79, 89],
+        // },
+        {
+          name: 'Chemistry',
+          data: this.students.map((student: any) => student.chemistry),
+          // data: [70, 68, 60, 72, 82],
+        },
+        {
+          name: 'Maths',
+          data: this.students.map((student: any) => student.maths),
+          // data: [68, 70, 82, 91, 73],
+        },
+      ],
+      chart: {
+        height: 350,
+        type: 'bar',
+      },
+      legend: {
+        show: true,
+      },
+      strok: {
+        width: [0, 4, 5],
+        curve: 'smooth',
+      },
+      title: {
+        text: 'students marks',
+      },
+      xaxis: {
+        categories: [
+          'John Doe',
+          'Jane Doe',
+          'Jinnierick Doe',
+          'Rick Doe',
+          'David Doe',
+        ],
+      },
+    };
+  }
   title = 'figmaui';
   tableForm!: FormGroup;
   public student: any;
-  constructor() {}
+
   ngOnInit(): void {
     this.student = {};
     this.tableForm = new FormGroup({
@@ -56,16 +123,16 @@ export class AppComponent implements OnInit {
       fullName: 'John Doe',
       class: 'Class 1',
       physics: '80',
-      chemistry: '90',
-      maths: '70',
+      chemistry: '70',
+      maths: '68',
       isEdit: false,
     },
     {
       id: 2,
       fullName: 'Jane Doe',
       class: 'Class 2',
-      physics: '80',
-      chemistry: '90',
+      physics: '85',
+      chemistry: '68',
       maths: '70',
       isEdit: false,
     },
@@ -73,27 +140,27 @@ export class AppComponent implements OnInit {
       id: 3,
       fullName: 'Jinnierick Doe',
       class: 'Class 1',
-      physics: '80',
-      chemistry: '90',
-      maths: '70',
+      physics: '70',
+      chemistry: '60',
+      maths: '82',
       isEdit: false,
     },
     {
       id: 4,
-      fullName: 'rick Doe',
+      fullName: 'Rick Doe',
       class: 'Class 3',
-      physics: '80',
-      chemistry: '90',
-      maths: '70',
+      physics: '79',
+      chemistry: '72',
+      maths: '91',
       isEdit: false,
     },
     {
       id: 5,
-      fullName: 'david Doe',
+      fullName: 'David Doe',
       class: 'Class 1',
-      physics: '80',
-      chemistry: '90',
-      maths: '70',
+      physics: '89',
+      chemistry: '82',
+      maths: '73',
       isEdit: false,
     },
   ];
@@ -110,8 +177,6 @@ export class AppComponent implements OnInit {
       maths: new FormControl(student.maths),
     });
     this.students1 = JSON.parse(JSON.stringify(student));
-    // console.log(this.students1);
-    // console.log(this.tableForm);
   }
 
   onDelete(student: any) {
@@ -134,23 +199,12 @@ export class AppComponent implements OnInit {
     // this.physics = student.physics;
     // this.chemistry = student.chemistry;
     // this.maths = student.maths;
-    // this.tableForm.value.fullName = student.fullName;
-    // this.tableForm.value.class = student.class;
-    // this.tableForm.value.physics = student.physics;
-    // this.tableForm.value.chemistry = student.chemistry;
-    // this.tableForm.value.maths = student.maths;
-    // console.log(this.tableForm.value);
+
     student.fullName = this.tableForm.value.fullName;
     student.class = this.tableForm.value.class;
     student.physics = this.tableForm.value.physics;
     student.chemistry = this.tableForm.value.chemistry;
     student.maths = this.tableForm.value.maths;
-
-    // this.fullName = this.tableForm.value.fullName;
-    // this.class = this.tableForm.value.class;
-    // this.physics = this.tableForm.value.physics;
-    // this.chemistry = this.tableForm.value.chemistry;
-    // this.maths = this.tableForm.value.maths;
   }
   onCancel(student: any) {
     console.log('cancel');

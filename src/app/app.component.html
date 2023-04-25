@@ -98,7 +98,7 @@
         <td class="border-2">
           <div *ngIf="!student.isEdit">{{ student.maths }}</div>
           <div *ngIf="student.isEdit">
-            <input type="text" formControlName="maths" />
+            <input type="text" formControlName="1maths" />
           </div>
         </td>
         <td class="border-2">
@@ -135,3 +135,16 @@
     </tbody>
   </table>
 </form>
+<hr />
+<hr />
+<hr />
+<div class="text-center">
+  <apx-chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [xaxis]="chartOptions.xaxis"
+    [title]="chartOptions.title"
+    [colors]="chartOptions.colors"
+    [legend]="chartOptions.legend"
+  ></apx-chart>
+</div>
